@@ -23,10 +23,11 @@ class Document(models.Model):
     class Meta:
         verbose_name = "Documents"
         verbose_name_plural = "Documents"
+        unique_together = ('folder', 'name',)
 
     folder = models.ForeignKey(
         Folder, on_delete=models.CASCADE, related_name="documents")
-    name = models.CharField(unique=True, max_length=200)
+    name = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     last_update = models.DateTimeField(auto_now=True)
